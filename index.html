@@ -1,23 +1,519 @@
-<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>짤카드 스튜디오</title><style>
-:root{font-family:'DM Sans','Noto Sans KR',system-ui,sans-serif;color:#20282b;background:#f5f5f2;font-synthesis:none;text-rendering:optimizeLegibility;--ink:#20282b;--muted:#778184;--line:#e7e9e6;--mint:#c9f27a;--deep:#183b35;--paper:#fff;--shadow:0 16px 45px #23352b0c}*{box-sizing:border-box}body{margin:0;min-height:100vh}header{background:#fff;border-bottom:1px solid var(--line);padding:0 28px}.header-inner{height:76px;max-width:1440px;margin:auto;display:flex;align-items:center;gap:12px}.brand-mark{width:38px;height:38px;border-radius:13px;background:var(--deep);color:var(--mint);display:grid;place-items:center;font-size:19px;font-weight:800;letter-spacing:-2px}.brand-copy{display:flex;flex-direction:column;gap:1px}.brand-copy h1{font-size:17px;letter-spacing:-.5px;margin:0;font-weight:800}.eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:700;color:#82908a}.header-right{margin-left:auto;display:flex;align-items:center;gap:8px;color:#60706a;font-size:12px}.live-dot{width:7px;height:7px;border-radius:50%;background:#72b94c;box-shadow:0 0 0 3px #72b94c20}main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;max-width:1440px;margin:24px auto;padding:0 28px}.panel{grid-column:2;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);align-self:start}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.panel-head h2{font-size:16px;letter-spacing:-.3px;margin:0;font-weight:750}.step-pill{font-size:10px;font-weight:700;color:#71807a;background:#f1f4ef;border-radius:20px;padding:6px 9px;letter-spacing:.5px}.group-label{font-size:11px;text-transform:uppercase;letter-spacing:1.15px;color:#87918a;font-weight:800;margin:19px 0 8px}label{display:block;font-size:12px;font-weight:700;color:#46514d;margin:12px 0 6px}input,select,button,textarea{font:inherit;width:100%;border:1px solid #dfe4df;border-radius:9px;background:#fff;color:var(--ink);padding:10px 11px;transition:border-color .18s,box-shadow .18s,transform .18s}input:focus,select:focus,textarea:focus{outline:0;border-color:#7b9b62;box-shadow:0 0 0 3px #c9f27a45}input[type=file]{font-size:11px;padding:8px;background:#fafbf9}input[type=color]{height:40px;padding:4px;cursor:pointer}input[type=range]{accent-color:#557b43;padding:0;border:0;box-shadow:none}.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}textarea{resize:vertical;line-height:1.6}button{cursor:pointer;background:#f5f7f3;font-size:12px;font-weight:700;border-color:#e1e6df;margin-top:7px}button:hover{border-color:#bac8b4;transform:translateY(-1px)}button:active{transform:translateY(0)}button.primary{background:var(--deep);color:#fff;border:0;font-weight:750;min-height:46px;font-size:13px;letter-spacing:.1px;box-shadow:0 7px 16px #183b3528}button.primary:hover{background:#24564c}.note{font-size:11px;color:var(--muted);line-height:1.6;margin-top:6px}.section{border-top:1px solid var(--line);margin-top:20px;padding-top:16px}.section h2{font-size:12px;margin:0 0 8px;letter-spacing:.1px}.templates{max-height:110px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:6px}.templates button{text-align:left;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;padding:8px}.stage{grid-column:1;grid-row:1;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:calc(100vh - 124px);background-color:#eceee9;background-image:radial-gradient(#d5d9d1 0.8px,transparent .8px);background-size:17px 17px;border:1px solid #e3e5df;border-radius:20px;padding:54px 32px 32px;overflow:hidden}.preview-toolbar{position:absolute;left:22px;right:22px;top:17px;display:flex;align-items:center;justify-content:space-between;color:#69736e;font-size:11px;font-weight:700}.preview-toolbar span:last-child{background:#fff;border:1px solid #e3e6df;padding:6px 10px;border-radius:20px}canvas{max-width:100%;max-height:calc(100vh - 220px);height:auto;width:auto;object-fit:contain;background:white;box-shadow:0 18px 50px #26362d2b;border-radius:3px}.status{padding:10px 12px;background:#f4f6f1;border:1px solid #eaeee8;border-radius:9px;margin-top:12px;min-height:40px;font-size:11px;color:#58635e;line-height:1.5}.tiny{font-size:12px}.privacy-line{padding:9px 11px;background:#f6f8f4;border-radius:9px;color:#6d7c71;font-size:10px;margin-top:8px;line-height:1.45}.privacy-line strong{color:#3c6a47}@media(max-width:900px){main{grid-template-columns:minmax(0,1fr) 320px;gap:14px;padding:0 16px}.panel{padding:17px}.stage{padding:52px 16px 20px}}@media(max-width:700px){header{padding:0 16px}.header-inner{height:66px}main{grid-template-columns:1fr;margin:14px auto;padding:0 12px}.stage{grid-column:1;grid-row:1;min-height:58vh;order:-1}.panel{grid-column:1;grid-row:2}.panel{border-radius:15px}.stage canvas{max-height:55vh}.header-right{font-size:0}.header-right .live-dot{margin-right:6px}}
-</style><header><div class="header-inner"><div class="brand-mark" aria-hidden="true">짤</div><div class="brand-copy"><span class="eyebrow">CARD CREATOR</span><h1>짤카드 스튜디오</h1></div><div class="header-right"><span class="live-dot"></span><span>내 기기에서 안전하게 편집 중</span></div></div></header><main><section class="panel"><div class="panel-head"><h2>카드 편집</h2><span class="step-pill">EDIT · 01</span></div><div class="group-label">01  이미지</div><label for="file">이미지 불러오기 (PNG/JPEG)</label><input id="file" type="file" accept="image/png,image/jpeg"><div class="note">지원 형식: PNG, JPEG. 잘못된 파일은 현재 작업을 유지합니다.</div>
-<div class="group-label">02  캔버스</div><label for="ratio">화면 비율</label><select id="ratio"><option value="1">1:1</option><option value="0.8">4:5</option><option value="0.5625">9:16</option></select>
-<div class="group-label">03  텍스트</div><label for="copy">카드 문구</label><textarea id="copy" rows="3">오늘의 작은 발견</textarea><div class="row"><div><label for="x">가로 위치 (%)</label><input id="x" type="range" min="0" max="100" value="50"></div><div><label for="y">세로 위치 (%)</label><input id="y" type="range" min="0" max="100" value="78"></div></div><div class="row"><div><label for="size">글자 크기</label><input id="size" type="number" min="8" max="240" value="52"></div><div><label for="color">글자 색</label><input id="color" type="color" value="#ffffff"></div></div>
-<div class="section"><h2>저장한 템플릿</h2><label for="tname">템플릿 이름</label><input id="tname" placeholder="예: 봄 안내">
-<div class="row"><button id="save">현재 설정 저장</button><button id="update">선택 항목 수정</button></div><div class="templates" id="templates"></div><div class="row"><button id="load">불러오기</button><button id="delete">삭제</button></div></div>
-<div class="section"><h2>템플릿 백업</h2><button id="exportJson">JSON 내보내기</button><label for="jsonFile">JSON 가져오기</label><input id="jsonFile" type="file" accept="application/json,.json"><div class="note">전체 검증을 통과한 뒤에만 템플릿 목록을 바꿉니다.</div></div>
-<button class="primary" id="download">↓　PNG 이미지 저장</button><div class="privacy-line"><strong>✓ 로컬 처리</strong>　선택한 사진은 서버로 업로드되지 않습니다.</div><div id="status" class="status" role="status" aria-live="polite">합성 예시 이미지가 준비되었습니다.</div></section><section class="stage"><div class="preview-toolbar"><span>LIVE PREVIEW</span><span id="ratioBadge">1:1</span></div><canvas id="canvas" width="1000" height="1000" aria-label="이미지 편집 미리보기"></canvas></section></main>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>짤·카드 스튜디오</title>
+<style>
+  :root {
+    --ink: #1f2a28;
+    --muted: #4f5b56;
+    --line: #d5dcd3;
+    --bg: #f3f4ef;
+    --paper: #ffffff;
+    --deep: #183b35;
+    --mint: #c9f27a;
+    --focus: #0b57d0;
+    font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-size: 15px; line-height: 1.55; }
+
+  header { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .header-inner { max-width: 1400px; margin: auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--deep); color: var(--mint); display: grid; place-items: center; font-weight: 800; font-size: 19px; }
+  h1 { font-size: 19px; margin: 0; letter-spacing: -0.3px; }
+  .header-note { margin-left: auto; font-size: 14px; color: var(--muted); }
+
+  main { max-width: 1400px; margin: 16px auto 40px; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 20px; align-items: start; }
+
+  /* 미리보기 영역: 저장 버튼과 상태 메시지가 항상 같이 보이도록 화면에 붙여 둠 */
+  .stage { position: sticky; top: 12px; background: #e9ece6; border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .preview-bar { align-self: stretch; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; }
+  .badge { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-weight: 700; }
+  canvas { display: block; max-width: 100%; max-height: calc(100vh - 290px); width: auto; height: auto; background: #fff; box-shadow: 0 6px 24px rgba(20, 40, 30, .22); }
+  .stage-actions { align-self: stretch; }
+  .status { align-self: stretch; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 44px; font-size: 14px; color: #26312d; }
+
+  .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .panel h2 { font-size: 16px; margin: 0 0 6px; }
+  .block + .block { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 16px; }
+  label { display: block; font-size: 14px; font-weight: 700; margin: 12px 0 5px; }
+  input, select, textarea, button { font: inherit; width: 100%; border: 1.5px solid #9aa89c; border-radius: 8px; background: #fff; color: var(--ink); padding: 9px 11px; }
+  input[type=range] { padding: 0; border: 0; accent-color: var(--deep); }
+  input[type=color] { height: 42px; padding: 3px; cursor: pointer; }
+  input[type=file] { font-size: 14px; padding: 8px; }
+  textarea { resize: vertical; line-height: 1.5; }
+  .row { display: flex; gap: 12px; }
+  .row > * { flex: 1; min-width: 0; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  output { font-weight: 400; color: var(--muted); margin-left: 4px; }
+
+  button { cursor: pointer; font-weight: 700; min-height: 42px; background: #f2f5ef; }
+  button:hover { background: #e6ece1; }
+  button.primary { background: var(--deep); color: #fff; border: 0; min-height: 50px; font-size: 16px; }
+  button.primary:hover { background: #24564c; }
+  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .templates { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; max-height: 180px; overflow: auto; padding: 2px; }
+  .templates button { text-align: left; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .templates button[aria-pressed="true"] { background: var(--deep); color: #fff; border-color: var(--deep); font-weight: 700; }
+  .empty { color: var(--muted); font-size: 14px; grid-column: 1 / -1; padding: 6px 2px; }
+
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { button { transition: background-color .15s; } }
+
+  @media (max-width: 860px) {
+    main { grid-template-columns: 1fr; padding: 0 12px; margin-top: 10px; }
+    .header-inner { padding: 0 14px; }
+    .header-note { display: none; }
+    .stage { top: 0; z-index: 5; border-radius: 0 0 14px 14px; padding: 8px 12px 12px; gap: 8px; }
+    canvas { max-height: 30vh; }
+    .status { min-height: 0; padding: 6px 10px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand-mark" aria-hidden="true">짤</div>
+    <h1>짤·카드 스튜디오</h1>
+    <span class="header-note">사진은 이 기기 안에서만 처리되고 서버로 올라가지 않아요</span>
+  </div>
+</header>
+
+<main>
+  <section class="stage" aria-label="미리보기와 저장">
+    <div class="preview-bar"><span>미리보기</span><span class="badge" id="ratioBadge">1:1</span></div>
+    <canvas id="canvas" width="1000" height="1000" role="img" aria-label="카드 미리보기"></canvas>
+    <div class="stage-actions"><button class="primary" id="download">PNG 이미지로 저장</button></div>
+    <div id="status" class="status" role="status" aria-live="polite">합성 예시 이미지가 준비되었습니다.</div>
+  </section>
+
+  <section class="panel" aria-label="카드 편집">
+    <div class="block">
+      <h2>1. 이미지</h2>
+      <label for="file">이미지 불러오기 (PNG, JPEG)</label>
+      <input id="file" type="file" accept="image/png,image/jpeg">
+      <div class="note">PNG와 JPEG만 가능해요. 사용할 권리가 있는 이미지만 올려 주세요. 잘못된 파일은 거부하고 지금 작업을 그대로 둡니다.</div>
+    </div>
+
+    <div class="block">
+      <h2>2. 화면 비율</h2>
+      <label for="ratio">비율 선택</label>
+      <select id="ratio">
+        <option value="1">1:1 (정사각)</option>
+        <option value="0.8">4:5 (세로)</option>
+        <option value="0.5625">9:16 (스토리, 세로)</option>
+      </select>
+    </div>
+
+    <div class="block">
+      <h2>3. 문구</h2>
+      <label for="copy">카드 문구 (줄바꿈 가능)</label>
+      <textarea id="copy" rows="3">오늘의 작은 발견</textarea>
+      <div class="row">
+        <div><label for="x">가로 위치 <output id="xOut">50</output>%</label><input id="x" type="range" min="0" max="100" value="50"></div>
+        <div><label for="y">세로 위치 <output id="yOut">78</output>%</label><input id="y" type="range" min="0" max="100" value="78"></div>
+      </div>
+      <div class="row">
+        <div><label for="size">글자 크기 (8~240)</label><input id="size" type="number" min="8" max="240" value="52"></div>
+        <div><label for="color">글자 색</label><input id="color" type="color" value="#ffffff"></div>
+      </div>
+      <div class="note" id="fitNote" aria-live="polite"></div>
+    </div>
+
+    <div class="block">
+      <h2>4. 저장한 템플릿</h2>
+      <label for="tname">템플릿 이름 (30자까지, 중복 불가)</label>
+      <input id="tname" maxlength="30" placeholder="예: 봄 안내">
+      <div class="templates" id="templates"></div>
+      <div class="note">목록에서 하나를 고른 뒤 아래 버튼을 누르세요.</div>
+      <div class="btn-grid">
+        <button id="save">새로 저장</button>
+        <button id="update">선택 항목 수정</button>
+        <button id="load">불러오기</button>
+        <button id="delete">삭제</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>5. 템플릿 백업</h2>
+      <button id="exportJson">JSON 내보내기</button>
+      <label for="jsonFile">JSON 가져오기</label>
+      <input id="jsonFile" type="file" accept="application/json,.json">
+      <div class="note">검증을 통과한 파일만 가져오고, 기존 목록을 바꾸기 전에 먼저 물어봐요. 파일에는 입력한 문구가 그대로 들어가니 이름·연락처는 넣지 마세요.</div>
+    </div>
+
+    <div class="block">
+      <h2>개인정보 안내</h2>
+      <div class="note">템플릿은 이 브라우저(localStorage)에만 저장돼요. 공용 컴퓨터에서는 사용 후 브라우저 데이터를 지워 주세요. 저장한 PNG에는 원본 사진의 위치·기기 정보가 들어가지 않아요(그림을 다시 그려서 저장하기 때문).</div>
+    </div>
+  </section>
+</main>
+
 <script>
-(()=>{'use strict';const $=id=>document.getElementById(id),c=$('canvas'),ctx=c.getContext('2d');let img=null,selected=-1,templates=JSON.parse(localStorage.getItem('hangul-editor-templates')||'[]');const status=m=>$('status').textContent=m;const safeTemplates=x=>Array.isArray(x)&&x.every(t=>t&&typeof t.id==='string'&&typeof t.name==='string'&&typeof t.text==='string'&&Number.isFinite(t.ratio)&&Number.isFinite(t.size)&&Number.isFinite(t.x)&&Number.isFinite(t.y)&&typeof t.color==='string');function persist(){localStorage.setItem('hangul-editor-templates',JSON.stringify(templates));renderList()}function settings(){return {text:$('copy').value,ratio:Number($('ratio').value),size:Number($('size').value),x:Number($('x').value),y:Number($('y').value),color:$('color').value}}function apply(t){$('copy').value=t.text;$('ratio').value=String(t.ratio);$('size').value=t.size;$('x').value=t.x;$('y').value=t.y;$('color').value=t.color;draw()}
-function renderList(){$('templates').replaceChildren(...templates.map((t,i)=>{const b=document.createElement('button');b.textContent=(i===selected?'● ':'')+t.name;b.onclick=()=>{selected=i;$('tname').value=t.name;renderList()};return b}))}
-function draw(){const s=settings(),W=1000,H=Math.round(W*s.ratio);c.width=W;c.height=H;const badge=document.getElementById('ratioBadge');if(badge)badge.textContent=s.ratio===1?'1:1':s.ratio===0.8?'4:5':'9:16';ctx.fillStyle='#d4e8df';ctx.fillRect(0,0,W,H);if(img){const scale=Math.max(W/img.width,H/img.height),w=img.width*scale,h=img.height*scale;ctx.drawImage(img,(W-w)/2,(H-h)/2,w,h)}else{const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#5caa9b');g.addColorStop(1,'#f1bd79');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff8';ctx.beginPath();ctx.arc(W*.72,H*.28,Math.min(W,H)*.16,0,Math.PI*2);ctx.fill();ctx.fillStyle='#286454';ctx.beginPath();ctx.moveTo(0,H*.75);ctx.quadraticCurveTo(W*.25,H*.3,W*.55,H*.72);ctx.quadraticCurveTo(W*.8,H*.32,W,H*.68);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill()}
-const px=s.size;ctx.font=`700 ${px}px system-ui, 'Malgun Gothic', sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='rgba(0,0,0,.34)';const lines=s.text.split(/\r?\n/);const x=W*s.x/100,y=H*s.y/100,lineH=px*1.25;lines.forEach((line,i)=>ctx.fillText(line,x,y+(i-(lines.length-1)/2)*lineH,W*.9));ctx.fillStyle=s.color;lines.forEach((line,i)=>ctx.fillText(line,x,y+(i-(lines.length-1)/2)*lineH,W*.9))}
-$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;if(!['image/png','image/jpeg'].includes(f.type)){status('거부됨: PNG 또는 JPEG만 지원합니다. 기존 작업은 유지되었습니다.');e.target.value='';return}const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{img=im;draw();URL.revokeObjectURL(u);status('이미지를 불러왔습니다.')};im.onerror=()=>{URL.revokeObjectURL(u);status('거부됨: 이미지 데이터를 읽을 수 없습니다. 기존 작업은 유지되었습니다.')};im.src=u};['ratio','copy','x','y','size','color'].forEach(id=>$(id).addEventListener('input',draw));
-$('save').onclick=()=>{const name=$('tname').value.trim();if(!name){status('템플릿 이름을 입력하세요.');return}templates.push({id:crypto.randomUUID(),name,...settings()});selected=templates.length-1;persist();status('템플릿을 저장했습니다.')};$('update').onclick=()=>{if(selected<0||!templates[selected])return status('수정할 템플릿을 선택하세요.');const name=$('tname').value.trim();if(!name)return status('템플릿 이름을 입력하세요.');templates[selected]={...templates[selected],name,...settings()};persist();status('선택한 템플릿을 수정했습니다.')};$('load').onclick=()=>{if(selected<0||!templates[selected])return status('불러올 템플릿을 선택하세요.');apply(templates[selected]);status('템플릿을 불러왔습니다.')};$('delete').onclick=()=>{if(selected<0||!templates[selected])return status('삭제할 템플릿을 선택하세요.');templates.splice(selected,1);selected=-1;persist();status('템플릿을 삭제했습니다.')};
-$('exportJson').onclick=()=>{const b=new Blob([JSON.stringify({version:1,templates},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='templates.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};$('jsonFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const o=JSON.parse(await f.text());if(o.version!==1||!safeTemplates(o.templates))throw Error('필수 항목 또는 형식이 올바르지 않습니다.');templates=o.templates;selected=-1;persist();status('JSON을 검증하고 템플릿을 복원했습니다.')}catch(err){status('JSON 가져오기 거부: '+err.message+' 기존 템플릿은 유지되었습니다.')}finally{e.target.value=''}};
-$('download').onclick=()=>c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='finished-'+$('ratio').selectedOptions[0].text.replace(':','x')+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)},'image/png');draw();renderList()})();
-</script></html>
+(() => {
+  'use strict';
 
+  // ---------- 설정 ----------
+  const STORAGE_KEY = 'hangul-editor-templates';
+  const W = 1000;                                   // 가로 픽셀은 항상 1000
+  // ratio 값 = 가로/세로. 세로 픽셀 H = W / ratio
+  const RATIOS = [
+    { value: 1,      label: '1:1'  },
+    { value: 0.8,    label: '4:5'  },
+    { value: 0.5625, label: '9:16' },
+  ];
+  const SIZE_MIN = 8, SIZE_MAX = 240, MAX_TEMPLATES = 50, MAX_TEXT = 200, MAX_NAME = 30;
+  const MAX_IMAGE_BYTES = 25 * 1024 * 1024, MAX_JSON_BYTES = 1024 * 1024;
 
+  const $ = id => document.getElementById(id);
+  const canvas = $('canvas');
+  const ctx = canvas.getContext('2d');
+  let img = null;          // 불러온 이미지 (없으면 기본 합성 배경)
+  let selected = -1;       // 목록에서 고른 템플릿 번호
 
+  const setStatus = message => { $('status').textContent = message; };
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
+  // ---------- 템플릿 검증 (불러오기·저장소 읽기에 공통 사용) ----------
+  // 문제가 있으면 사용자에게 보여줄 문장을, 없으면 null을 돌려준다.
+  function validateTemplate(t, index) {
+    const where = `${index + 1}번째 템플릿`;
+    if (!t || typeof t !== 'object' || Array.isArray(t)) return `${where}이 올바른 형식이 아닙니다.`;
+    if (typeof t.id !== 'string' || !t.id.trim() || t.id.length > 80) return `${where}의 id 값이 올바르지 않습니다.`;
+    if (typeof t.name !== 'string' || !t.name.trim() || t.name.length > MAX_NAME) return `${where}의 name 값이 올바르지 않습니다(1~${MAX_NAME}자 문자열).`;
+    if (typeof t.text !== 'string' || t.text.length > MAX_TEXT) return `${where}의 text 값이 올바르지 않습니다(${MAX_TEXT}자 이하 문자열).`;
+    if (!RATIOS.some(r => r.value === t.ratio)) return `${where}의 ratio 값이 올바르지 않습니다(1, 0.8, 0.5625 중 하나).`;
+    if (!Number.isFinite(t.size) || t.size < SIZE_MIN || t.size > SIZE_MAX) return `${where}의 size 값이 올바르지 않습니다(${SIZE_MIN}~${SIZE_MAX}).`;
+    if (!Number.isFinite(t.x) || t.x < 0 || t.x > 100) return `${where}의 x 값이 올바르지 않습니다(0~100).`;
+    if (!Number.isFinite(t.y) || t.y < 0 || t.y > 100) return `${where}의 y 값이 올바르지 않습니다(0~100).`;
+    if (typeof t.color !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(t.color)) return `${where}의 color 값이 올바르지 않습니다(#rrggbb 형식).`;
+    return null;
+  }
+
+  // 백업 파일 전체 검증. 하나라도 문제면 파일 전체를 거부한다.
+  function validateBackup(data) {
+    if (!data || typeof data !== 'object' || Array.isArray(data)) return '파일의 최상위 구조가 올바르지 않습니다.';
+    if (data.version !== 1) return `지원하지 않는 version 입니다(필요: 1, 파일: ${JSON.stringify(data.version)}).`;
+    if (!Array.isArray(data.templates)) return 'templates 항목이 목록이 아닙니다.';
+    if (data.templates.length === 0) return '템플릿이 하나도 없어 가져올 내용이 없습니다.';
+    if (data.templates.length > MAX_TEMPLATES) return `템플릿이 너무 많습니다(최대 ${MAX_TEMPLATES}개).`;
+    for (let i = 0; i < data.templates.length; i++) {
+      const problem = validateTemplate(data.templates[i], i);
+      if (problem) return problem;
+    }
+    const ids = new Set(), names = new Set();
+    for (const t of data.templates) {
+      if (ids.has(t.id)) return `id가 겹치는 템플릿이 있습니다(${t.id}).`;
+      if (names.has(t.name.trim())) return `이름이 겹치는 템플릿이 있습니다(${t.name}).`;
+      ids.add(t.id); names.add(t.name.trim());
+    }
+    return null;
+  }
+
+  const clean = t => ({ id: t.id, name: t.name.trim(), text: t.text, ratio: t.ratio, size: t.size, x: t.x, y: t.y, color: t.color.toLowerCase() });
+
+  // ---------- 저장소 ----------
+  let loadNotice = '';
+  function loadTemplates() {
+    let raw;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) { loadNotice = '이 브라우저에서는 템플릿 저장소를 쓸 수 없어요.'; return []; }
+    if (raw === null) return [];
+    let data;
+    try { data = JSON.parse(raw); } catch (e) { loadNotice = '저장된 템플릿을 읽지 못해 빈 목록으로 시작합니다. 새로 저장하면 정상으로 돌아와요.'; return []; }
+    if (!Array.isArray(data)) { loadNotice = '저장된 템플릿 형식이 올바르지 않아 빈 목록으로 시작합니다.'; return []; }
+    const names = new Set(), ids = new Set(), ok = [];
+    data.forEach((t, i) => {
+      if (validateTemplate(t, i) === null && !ids.has(t.id) && !names.has(t.name.trim()) && ok.length < MAX_TEMPLATES) {
+        ids.add(t.id); names.add(t.name.trim()); ok.push(clean(t));
+      }
+    });
+    if (ok.length !== data.length) loadNotice = `저장된 템플릿 중 ${data.length - ok.length}개는 형식이 올바르지 않아 제외했습니다.`;
+    return ok;
+  }
+  let templates = loadTemplates();
+
+  // 저장에 성공했을 때만 화면의 목록을 바꾼다. 실패하면 기존 목록이 그대로 남는다.
+  function commit(next) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); }
+    catch (e) { setStatus('저장하지 못했어요(브라우저 저장 공간 오류). 템플릿 목록은 바뀌지 않았습니다.'); return false; }
+    templates = next;
+    return true;
+  }
+
+  const newId = () => (globalThis.crypto && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : 't-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+
+  // ---------- 그리기 ----------
+  const currentRatio = () => RATIOS.find(r => Math.abs(r.value - Number($('ratio').value)) < 1e-9) || RATIOS[0];
+
+  function settings() {
+    const size = Math.round(clamp(Number($('size').value) || SIZE_MIN, SIZE_MIN, SIZE_MAX));
+    return {
+      text: $('copy').value,
+      ratio: currentRatio(),
+      size,
+      x: clamp(Number($('x').value), 0, 100),
+      y: clamp(Number($('y').value), 0, 100),
+      color: /^#[0-9a-fA-F]{6}$/.test($('color').value) ? $('color').value : '#ffffff',
+    };
+  }
+
+  const fontFor = px => `700 ${px}px "Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Nanum Gothic",sans-serif`;
+
+  // 한 문단을 maxW 안에 들어가도록 줄바꿈한다(띄어쓰기 우선, 긴 단어는 글자 단위).
+  function wrapParagraph(paragraph, maxW) {
+    const lines = [];
+    let line = '';
+    const flush = () => { if (line !== '') lines.push(line); line = ''; };
+    for (const word of paragraph.split(' ')) {
+      const candidate = line === '' ? word : line + ' ' + word;
+      if (ctx.measureText(candidate).width <= maxW) { line = candidate; continue; }
+      flush();
+      if (ctx.measureText(word).width <= maxW) { line = word; continue; }
+      for (const ch of Array.from(word)) {
+        const t = line + ch;
+        if (ctx.measureText(t).width > maxW && line !== '') { lines.push(line); line = ch; } else { line = t; }
+      }
+    }
+    flush();
+    return lines.length ? lines : [''];
+  }
+  const wrapText = (text, maxW) => text.split(/\r?\n/).flatMap(p => wrapParagraph(p, maxW));
+
+  const isLight = hex => {
+    const n = parseInt(hex.slice(1), 16);
+    return (0.299 * (n >> 16 & 255) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) > 150;
+  };
+
+  function drawBackground(H) {
+    ctx.fillStyle = '#d4e8df';
+    ctx.fillRect(0, 0, W, H);
+    if (img) {
+      // 화면을 꽉 채우는 중앙 크롭(cover)
+      const scale = Math.max(W / img.width, H / img.height);
+      const w = img.width * scale, h = img.height * scale;
+      ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+      return;
+    }
+    const g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, '#5caa9b');
+    g.addColorStop(1, '#f1bd79');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,255,255,.55)';
+    ctx.beginPath();
+    ctx.arc(W * .72, H * .28, Math.min(W, H) * .16, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#286454';
+    ctx.beginPath();
+    ctx.moveTo(0, H * .75);
+    ctx.quadraticCurveTo(W * .25, H * .3, W * .55, H * .72);
+    ctx.quadraticCurveTo(W * .8, H * .32, W, H * .68);
+    ctx.lineTo(W, H);
+    ctx.lineTo(0, H);
+    ctx.fill();
+  }
+
+  function drawText(s, H) {
+    const maxW = W * 0.9, maxH = H * 0.9;
+    let px = s.size, lines, lineH;
+    // 글자가 화면보다 크면 맞을 때까지 줄여서 그린다(잘림 방지)
+    for (;;) {
+      ctx.font = fontFor(px);
+      lines = wrapText(s.text, maxW);
+      lineH = Math.round(px * 1.3);
+      if (lines.length * lineH <= maxH || px <= SIZE_MIN) break;
+      px = Math.max(SIZE_MIN, px - 2);
+    }
+    $('fitNote').textContent = px < s.size ? `글자가 화면보다 커서 ${px}px로 줄여 표시하고 있어요.` : '';
+
+    const blockH = lines.length * lineH;
+    const widest = Math.max(...lines.map(l => ctx.measureText(l).width));
+    const margin = W * 0.03;
+    // 위치 슬라이더를 끝까지 밀어도 글자가 화면 밖으로 나가지 않게 보정
+    const cx = clamp(W * s.x / 100, widest / 2 + margin, W - widest / 2 - margin);
+    const cy = clamp(H * s.y / 100, blockH / 2 + H * .03, H - blockH / 2 - H * .03);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = Math.max(3, px / 6);
+    ctx.strokeStyle = isLight(s.color) ? 'rgba(0,0,0,.6)' : 'rgba(255,255,255,.75)';   // 밝은 글자는 어두운 테두리
+    lines.forEach((line, i) => {
+      if (!line) return;
+      const y = cy - blockH / 2 + lineH * (i + .5);
+      ctx.strokeText(line, cx, y);
+      ctx.fillStyle = s.color;
+      ctx.fillText(line, cx, y);
+    });
+  }
+
+  function draw() {
+    const s = settings();
+    const H = Math.round(W / s.ratio.value);
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    $('ratioBadge').textContent = s.ratio.label;
+    $('xOut').textContent = s.x;
+    $('yOut').textContent = s.y;
+    drawBackground(H);
+    drawText(s, H);
+    canvas.setAttribute('aria-label', `카드 미리보기, 비율 ${s.ratio.label}, 문구: ${s.text.slice(0, 60) || '(비어 있음)'}`);
+  }
+
+  // ---------- 이미지 불러오기 ----------
+  const isAllowedImage = f => ['image/png', 'image/jpeg'].includes(f.type) || (f.type === '' && /\.(png|jpe?g)$/i.test(f.name));
+
+  $('file').addEventListener('change', e => {
+    const f = e.target.files[0];
+    e.target.value = '';                       // 같은 파일을 다시 골라도 동작하도록 비움
+    if (!f) return;
+    if (!isAllowedImage(f)) { setStatus('거부됨: PNG 또는 JPEG만 지원합니다. 기존 작업은 유지되었습니다.'); return; }
+    if (f.size > MAX_IMAGE_BYTES) { setStatus('거부됨: 파일이 너무 큽니다(25MB 이하만 가능). 기존 작업은 유지되었습니다.'); return; }
+    const url = URL.createObjectURL(f), im = new Image();
+    im.onload = () => { URL.revokeObjectURL(url); img = im; draw(); setStatus('이미지를 불러왔습니다.'); };
+    im.onerror = () => { URL.revokeObjectURL(url); setStatus('거부됨: 이미지 데이터를 읽을 수 없습니다. 기존 작업은 유지되었습니다.'); };
+    im.src = url;
+  });
+
+  ['ratio', 'copy', 'x', 'y', 'size', 'color'].forEach(id => $(id).addEventListener('input', draw));
+  $('size').addEventListener('change', () => {          // 칸을 벗어날 때 범위 밖 값을 바로잡는다
+    const raw = Number($('size').value), fixed = settings().size;
+    if (!Number.isFinite(raw) || $('size').value === '' || raw !== fixed) {
+      $('size').value = fixed;
+      setStatus(`글자 크기는 ${SIZE_MIN}~${SIZE_MAX} 사이로 맞췄어요.`);
+      draw();
+    }
+  });
+
+  // ---------- 템플릿 ----------
+  function renderList() {
+    const box = $('templates');
+    if (templates.length === 0) {
+      const p = document.createElement('div');
+      p.className = 'empty';
+      p.textContent = '저장한 템플릿이 아직 없어요.';
+      box.replaceChildren(p);
+      return;
+    }
+    box.replaceChildren(...templates.map((t, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = t.name;
+      b.title = t.name;
+      b.setAttribute('aria-pressed', String(i === selected));
+      b.onclick = () => { selected = i; $('tname').value = t.name; renderList(); setStatus(`'${t.name}' 선택됨. [불러오기]를 누르면 적용돼요.`); };
+      return b;
+    }));
+  }
+
+  function applyTemplate(t) {
+    $('copy').value = t.text;
+    $('ratio').value = String(t.ratio);
+    $('size').value = t.size;
+    $('x').value = t.x;
+    $('y').value = t.y;
+    $('color').value = t.color;
+    draw();
+  }
+
+  const nameTaken = (name, exceptIndex) => templates.some((t, i) => i !== exceptIndex && t.name === name);
+
+  $('save').onclick = () => {
+    const name = $('tname').value.trim();
+    if (!name) return setStatus('템플릿 이름을 입력하세요.');
+    if (nameTaken(name, -1)) return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰거나 [선택 항목 수정]을 사용하세요.');
+    if (templates.length >= MAX_TEMPLATES) return setStatus(`템플릿은 최대 ${MAX_TEMPLATES}개까지 저장할 수 있어요.`);
+    const s = settings();
+    const t = { id: newId(), name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() };
+    if (!commit([...templates, t])) return;
+    selected = templates.length - 1;
+    renderList();
+    setStatus(s.text.length > MAX_TEXT ? `템플릿을 저장했습니다(문구는 ${MAX_TEXT}자까지만 저장).` : '템플릿을 저장했습니다.');
+  };
+
+  $('update').onclick = () => {
+    if (selected < 0 || !templates[selected]) return setStatus('수정할 템플릿을 목록에서 선택하세요.');
+    const name = $('tname').value.trim();
+    if (!name) return setStatus('템플릿 이름을 입력하세요.');
+    if (nameTaken(name, selected)) return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰세요.');
+    const s = settings();
+    const next = templates.slice();
+    next[selected] = { id: templates[selected].id, name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() };
+    if (!commit(next)) return;
+    renderList();
+    setStatus('선택한 템플릿을 수정했습니다.');
+  };
+
+  $('load').onclick = () => {
+    if (selected < 0 || !templates[selected]) return setStatus('불러올 템플릿을 목록에서 선택하세요.');
+    applyTemplate(templates[selected]);
+    setStatus('템플릿을 불러왔습니다.');
+  };
+
+  $('delete').onclick = () => {
+    if (selected < 0 || !templates[selected]) return setStatus('삭제할 템플릿을 목록에서 선택하세요.');
+    const name = templates[selected].name;
+    if (!window.confirm(`'${name}' 템플릿을 삭제할까요?`)) return setStatus('삭제를 취소했어요.');
+    if (!commit(templates.filter((_, i) => i !== selected))) return;
+    selected = -1;
+    renderList();
+    setStatus('템플릿을 삭제했습니다.');
+  };
+
+  // ---------- JSON 내보내기 / 가져오기 ----------
+  function downloadBlob(blob, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+
+  $('exportJson').onclick = () => {
+    if (templates.length === 0) return setStatus('내보낼 템플릿이 없어요. 먼저 템플릿을 저장하세요.');
+    downloadBlob(new Blob([JSON.stringify({ version: 1, templates }, null, 2)], { type: 'application/json' }), 'templates.json');
+    setStatus(`템플릿 ${templates.length}개를 templates.json으로 내보냈습니다.`);
+  };
+
+  $('jsonFile').addEventListener('change', async e => {
+    const f = e.target.files[0];
+    e.target.value = '';
+    if (!f) return;
+    const keep = ' 기존 템플릿은 유지되었습니다.';
+    if (f.size > MAX_JSON_BYTES) return setStatus('JSON 가져오기 거부: 파일이 너무 큽니다(1MB 이하).' + keep);
+    let data;
+    try { data = JSON.parse(await f.text()); }
+    catch (err) { return setStatus('JSON 가져오기 거부: 올바른 JSON 형식이 아닙니다(괄호·따옴표가 닫혔는지 확인하세요).' + keep); }
+    const problem = validateBackup(data);
+    if (problem) return setStatus('JSON 가져오기 거부: ' + problem + keep);
+    if (templates.length > 0 && !window.confirm(`기존 템플릿 ${templates.length}개를 가져온 ${data.templates.length}개로 바꿀까요?`)) {
+      return setStatus('가져오기를 취소했어요.' + keep);
+    }
+    if (!commit(data.templates.map(clean))) return;
+    selected = -1;
+    renderList();
+    setStatus(`JSON을 검증하고 템플릿 ${templates.length}개를 복원했습니다.`);
+  });
+
+  // ---------- PNG 저장 ----------
+  $('download').onclick = () => {
+    canvas.toBlob(blob => {
+      if (!blob) return setStatus('PNG를 만들지 못했어요. 화면 비율을 다시 선택한 뒤 시도해 주세요.');
+      downloadBlob(blob, 'finished-' + currentRatio().label.replace(':', 'x') + '.png');
+      setStatus(`${currentRatio().label} 비율 PNG를 저장했습니다.`);
+    }, 'image/png');
+  };
+
+  // ---------- 시작 ----------
+  draw();
+  renderList();
+  if (loadNotice) setStatus(loadNotice);
+})();
+</script>
+</body>
+</html>
