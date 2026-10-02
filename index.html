@@ -6,14 +6,17 @@
 <title>짤·카드 스튜디오</title>
 <style>
   :root {
-    --ink: #1f2a28;
-    --muted: #4f5b56;
-    --line: #d5dcd3;
-    --bg: #f3f4ef;
+    --ink: #3b2230;          /* 본문 글자: 진한 자두색 */
+    --muted: #6a4a59;        /* 보조 글자 (흰 바탕 대비 7:1) */
+    --line: #f1c9d7;
+    --bg: #fff4f7;
     --paper: #ffffff;
-    --deep: #183b35;
-    --mint: #c9f27a;
-    --focus: #0b57d0;
+    --soft: #ffe3ec;         /* 미리보기 바탕 */
+    --pink: #ffc9da;         /* 베이비핑크 포인트 */
+    --deep: #b23a62;         /* 주요 버튼 (흰 글자 대비 5.7:1) */
+    --deep-hover: #9c2f54;
+    --edge: #c07a96;         /* 입력칸 테두리 */
+    --focus: #7a2745;
     font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
     color: var(--ink);
     background: var(--bg);
@@ -23,25 +26,26 @@
 
   header { background: var(--paper); border-bottom: 1px solid var(--line); }
   .header-inner { max-width: 1400px; margin: auto; padding: 0 24px; height: 64px; display: flex; align-items: center; gap: 12px; }
-  .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--deep); color: var(--mint); display: grid; place-items: center; font-weight: 800; font-size: 19px; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--pink); color: #7a2745; display: grid; place-items: center; font-weight: 800; font-size: 19px; }
   h1 { font-size: 19px; margin: 0; letter-spacing: -0.3px; }
   .header-note { margin-left: auto; font-size: 14px; color: var(--muted); }
 
   main { max-width: 1400px; margin: 16px auto 40px; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 20px; align-items: start; }
 
   /* 미리보기 영역: 저장 버튼과 상태 메시지가 항상 같이 보이도록 화면에 붙여 둠 */
-  .stage { position: sticky; top: 12px; background: #e9ece6; border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .stage { position: sticky; top: 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .preview-bar { align-self: stretch; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; }
   .badge { background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; font-weight: 700; }
-  canvas { display: block; max-width: 100%; max-height: calc(100vh - 290px); width: auto; height: auto; background: #fff; box-shadow: 0 6px 24px rgba(20, 40, 30, .22); }
+  canvas { display: block; max-width: 100%; max-height: calc(100vh - 330px); width: auto; height: auto; background: #fff; box-shadow: 0 6px 24px rgba(150, 50, 90, .20); touch-action: none; }
+  .hint { align-self: stretch; font-size: 13px; color: var(--muted); text-align: center; }
   .stage-actions { align-self: stretch; }
-  .status { align-self: stretch; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 44px; font-size: 14px; color: #26312d; }
+  .status { align-self: stretch; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-height: 44px; font-size: 14px; color: var(--ink); }
 
   .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
   .panel h2 { font-size: 16px; margin: 0 0 6px; }
   .block + .block { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 16px; }
   label { display: block; font-size: 14px; font-weight: 700; margin: 12px 0 5px; }
-  input, select, textarea, button { font: inherit; width: 100%; border: 1.5px solid #9aa89c; border-radius: 8px; background: #fff; color: var(--ink); padding: 9px 11px; }
+  input, select, textarea, button { font: inherit; width: 100%; border: 1.5px solid var(--edge); border-radius: 8px; background: #fff; color: var(--ink); padding: 9px 11px; }
   input[type=range] { padding: 0; border: 0; accent-color: var(--deep); }
   input[type=color] { height: 42px; padding: 3px; cursor: pointer; }
   input[type=file] { font-size: 14px; padding: 8px; }
@@ -51,10 +55,10 @@
   .note { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
   output { font-weight: 400; color: var(--muted); margin-left: 4px; }
 
-  button { cursor: pointer; font-weight: 700; min-height: 42px; background: #f2f5ef; }
-  button:hover { background: #e6ece1; }
+  button { cursor: pointer; font-weight: 700; min-height: 42px; background: #fff0f5; }
+  button:hover { background: #ffe0eb; }
   button.primary { background: var(--deep); color: #fff; border: 0; min-height: 50px; font-size: 16px; }
-  button.primary:hover { background: #24564c; }
+  button.primary:hover { background: var(--deep-hover); }
   .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
   .templates { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; max-height: 180px; overflow: auto; padding: 2px; }
   .templates button { text-align: left; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -67,7 +71,7 @@
   @media (max-width: 860px) {
     main { grid-template-columns: 1fr; padding: 0 12px; margin-top: 10px; }
     .header-inner { padding: 0 14px; }
-    .header-note { display: none; }
+    .header-note, .hint { display: none; }
     .stage { top: 0; z-index: 5; border-radius: 0 0 14px 14px; padding: 8px 12px 12px; gap: 8px; }
     canvas { max-height: 30vh; }
     .status { min-height: 0; padding: 6px 10px; font-size: 13px; }
@@ -87,6 +91,7 @@
   <section class="stage" aria-label="미리보기와 저장">
     <div class="preview-bar"><span>미리보기</span><span class="badge" id="ratioBadge">1:1</span></div>
     <canvas id="canvas" width="1000" height="1000" role="img" aria-label="카드 미리보기"></canvas>
+    <div class="hint">글자를 마우스나 손가락으로 끌어서 옮길 수 있어요</div>
     <div class="stage-actions"><button class="primary" id="download">PNG 이미지로 저장</button></div>
     <div id="status" class="status" role="status" aria-live="polite">합성 예시 이미지가 준비되었습니다.</div>
   </section>
@@ -114,13 +119,14 @@
       <label for="copy">카드 문구 (줄바꿈 가능)</label>
       <textarea id="copy" rows="3">오늘의 작은 발견</textarea>
       <div class="row">
-        <div><label for="x">가로 위치 <output id="xOut">50</output>%</label><input id="x" type="range" min="0" max="100" value="50"></div>
-        <div><label for="y">세로 위치 <output id="yOut">78</output>%</label><input id="y" type="range" min="0" max="100" value="78"></div>
+        <div><label for="x">가로 위치 <output id="xOut">50</output>%</label><input id="x" type="range" min="0" max="100" step="0.1" value="50"></div>
+        <div><label for="y">세로 위치 <output id="yOut">78</output>%</label><input id="y" type="range" min="0" max="100" step="0.1" value="78"></div>
       </div>
       <div class="row">
         <div><label for="size">글자 크기 (8~240)</label><input id="size" type="number" min="8" max="240" value="52"></div>
         <div><label for="color">글자 색</label><input id="color" type="color" value="#ffffff"></div>
       </div>
+      <div class="note">미리보기에서 글자를 직접 끌어서도 옮길 수 있어요. 슬라이더는 미세 조정에 쓰세요.</div>
       <div class="note" id="fitNote" aria-live="polite"></div>
     </div>
 
@@ -173,7 +179,9 @@
   const canvas = $('canvas');
   const ctx = canvas.getContext('2d');
   let img = null;          // 불러온 이미지 (없으면 기본 합성 배경)
-  let selected = -1;       // 목록에서 고른 템플릿 번호
+  let layout = null;       // 마지막으로 그린 글자 영역 {cx, cy, w, h, empty} (끌어 옮기기용)
+  let selectionLost = false;   // 고른 템플릿이 다른 창에서 사라졌는지
+  let selectedId = null;   // 목록에서 고른 템플릿의 id (배열 위치가 아니라 id로 대상을 가리킨다)
 
   const setStatus = message => { $('status').textContent = message; };
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
@@ -291,7 +299,7 @@
   };
 
   function drawBackground(H) {
-    ctx.fillStyle = '#d4e8df';
+    ctx.fillStyle = '#ffeef3';
     ctx.fillRect(0, 0, W, H);
     if (img) {
       // 화면을 꽉 채우는 중앙 크롭(cover)
@@ -301,15 +309,15 @@
       return;
     }
     const g = ctx.createLinearGradient(0, 0, W, H);
-    g.addColorStop(0, '#5caa9b');
-    g.addColorStop(1, '#f1bd79');
+    g.addColorStop(0, '#ffe3ec');
+    g.addColorStop(1, '#ffb3c8');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, W, H);
-    ctx.fillStyle = 'rgba(255,255,255,.55)';
+    ctx.fillStyle = 'rgba(255,255,255,.78)';
     ctx.beginPath();
     ctx.arc(W * .72, H * .28, Math.min(W, H) * .16, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = '#286454';
+    ctx.fillStyle = '#d4668c';
     ctx.beginPath();
     ctx.moveTo(0, H * .75);
     ctx.quadraticCurveTo(W * .25, H * .3, W * .55, H * .72);
@@ -339,6 +347,8 @@
     const cx = clamp(W * s.x / 100, widest / 2 + margin, W - widest / 2 - margin);
     const cy = clamp(H * s.y / 100, blockH / 2 + H * .03, H - blockH / 2 - H * .03);
 
+    layout = { cx, cy, w: widest, h: blockH, empty: s.text.trim() === '' };
+
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.lineJoin = 'round';
@@ -358,8 +368,8 @@
     const H = Math.round(W / s.ratio.value);
     if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
     $('ratioBadge').textContent = s.ratio.label;
-    $('xOut').textContent = s.x;
-    $('yOut').textContent = s.y;
+    $('xOut').textContent = Math.round(s.x);
+    $('yOut').textContent = Math.round(s.y);
     drawBackground(H);
     drawText(s, H);
     canvas.setAttribute('aria-label', `카드 미리보기, 비율 ${s.ratio.label}, 문구: ${s.text.slice(0, 60) || '(비어 있음)'}`);
@@ -394,7 +404,53 @@
     }
   });
 
+  // ---------- 글자 끌어서 옮기기 ----------
+  // 글자 영역을 잡고 끌면 가로/세로 위치 슬라이더 값이 같이 바뀐다(마우스·터치 공통).
+  let drag = null;
+  const toCanvas = e => {
+    const r = canvas.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * canvas.width / r.width, y: (e.clientY - r.top) * canvas.height / r.height };
+  };
+  const overText = p => !!layout && !layout.empty && Math.abs(p.x - layout.cx) <= layout.w / 2 + 24 && Math.abs(p.y - layout.cy) <= layout.h / 2 + 24;
+
+  canvas.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    const p = toCanvas(e);
+    if (!overText(p)) return;                                   // 글자 밖을 누르면 아무 일도 없음
+    drag = { dx: p.x - layout.cx, dy: p.y - layout.cy, moved: false };
+    canvas.setPointerCapture(e.pointerId);
+    canvas.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  canvas.addEventListener('pointermove', e => {
+    const p = toCanvas(e);
+    if (!drag) { canvas.style.cursor = overText(p) ? 'grab' : 'default'; return; }
+    $('x').value = clamp((p.x - drag.dx) / W * 100, 0, 100).toFixed(1);
+    $('y').value = clamp((p.y - drag.dy) / canvas.height * 100, 0, 100).toFixed(1);
+    drag.moved = true;
+    draw();
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    const moved = drag.moved;
+    drag = null;
+    canvas.style.cursor = 'default';
+    if (moved) { const s = settings(); setStatus(`글자 위치를 옮겼습니다(가로 ${Math.round(s.x)}%, 세로 ${Math.round(s.y)}%).`); }
+  };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+
   // ---------- 템플릿 ----------
+  // 저장된 데이터를 기준으로 삼는다: 동작 직전에 저장소에서 다시 읽어 와서,
+  // 다른 창에서 바뀐 내용이 있어도 엉뚱한 대상을 고치거나 지우지 않게 한다.
+  function refresh() {
+    templates = loadTemplates();
+    if (selectedId !== null && !templates.some(t => t.id === selectedId)) { selectedId = null; selectionLost = true; }
+  }
+  const findSelected = () => templates.find(t => t.id === selectedId) || null;
+  const GONE = '선택한 템플릿이 다른 창에서 이미 바뀌거나 삭제되었어요. 목록을 새로 불러왔습니다.';
+  const noTarget = verb => selectionLost ? GONE : `${verb} 템플릿을 목록에서 선택하세요.`;
+
   function renderList() {
     const box = $('templates');
     if (templates.length === 0) {
@@ -404,13 +460,22 @@
       box.replaceChildren(p);
       return;
     }
-    box.replaceChildren(...templates.map((t, i) => {
+    box.replaceChildren(...templates.map(t => {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = t.name;
       b.title = t.name;
-      b.setAttribute('aria-pressed', String(i === selected));
-      b.onclick = () => { selected = i; $('tname').value = t.name; renderList(); setStatus(`'${t.name}' 선택됨. [불러오기]를 누르면 적용돼요.`); };
+      b.dataset.id = t.id;
+      b.setAttribute('aria-pressed', String(t.id === selectedId));
+      b.onclick = () => {
+        refresh();
+        if (!templates.some(x => x.id === t.id)) { renderList(); return setStatus(GONE); }
+        selectedId = t.id;
+        selectionLost = false;
+        $('tname').value = t.name;
+        renderList();
+        setStatus(`'${t.name}' 선택됨. [불러오기]를 누르면 적용돼요.`);
+      };
       return b;
     }));
   }
@@ -425,49 +490,67 @@
     draw();
   }
 
-  const nameTaken = (name, exceptIndex) => templates.some((t, i) => i !== exceptIndex && t.name === name);
+  const nameTaken = (name, exceptId) => templates.some(t => t.id !== exceptId && t.name === name);
+  const fromControls = (id, name, s) => ({ id, name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() });
 
   $('save').onclick = () => {
+    refresh();
     const name = $('tname').value.trim();
-    if (!name) return setStatus('템플릿 이름을 입력하세요.');
-    if (nameTaken(name, -1)) return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰거나 [선택 항목 수정]을 사용하세요.');
+    if (!name) { renderList(); return setStatus('템플릿 이름을 입력하세요.'); }
+    if (nameTaken(name, null)) { renderList(); return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰거나 [선택 항목 수정]을 사용하세요.'); }
     if (templates.length >= MAX_TEMPLATES) return setStatus(`템플릿은 최대 ${MAX_TEMPLATES}개까지 저장할 수 있어요.`);
     const s = settings();
-    const t = { id: newId(), name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() };
+    const t = fromControls(newId(), name, s);
     if (!commit([...templates, t])) return;
-    selected = templates.length - 1;
+    selectedId = t.id;
     renderList();
     setStatus(s.text.length > MAX_TEXT ? `템플릿을 저장했습니다(문구는 ${MAX_TEXT}자까지만 저장).` : '템플릿을 저장했습니다.');
   };
 
   $('update').onclick = () => {
-    if (selected < 0 || !templates[selected]) return setStatus('수정할 템플릿을 목록에서 선택하세요.');
+    refresh();
+    const target = findSelected();
+    if (!target) { renderList(); return setStatus(noTarget('수정할')); }
     const name = $('tname').value.trim();
     if (!name) return setStatus('템플릿 이름을 입력하세요.');
-    if (nameTaken(name, selected)) return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰세요.');
-    const s = settings();
-    const next = templates.slice();
-    next[selected] = { id: templates[selected].id, name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() };
-    if (!commit(next)) return;
+    if (nameTaken(name, target.id)) return setStatus('같은 이름의 템플릿이 이미 있어요. 다른 이름을 쓰세요.');
+    const updated = fromControls(target.id, name, settings());          // id는 그대로 유지
+    if (!commit(templates.map(t => t.id === target.id ? updated : t))) return;
     renderList();
     setStatus('선택한 템플릿을 수정했습니다.');
   };
 
   $('load').onclick = () => {
-    if (selected < 0 || !templates[selected]) return setStatus('불러올 템플릿을 목록에서 선택하세요.');
-    applyTemplate(templates[selected]);
+    refresh();
+    const target = findSelected();
+    if (!target) { renderList(); return setStatus(noTarget('불러올')); }
+    applyTemplate(target);
+    renderList();
     setStatus('템플릿을 불러왔습니다.');
   };
 
   $('delete').onclick = () => {
-    if (selected < 0 || !templates[selected]) return setStatus('삭제할 템플릿을 목록에서 선택하세요.');
-    const name = templates[selected].name;
-    if (!window.confirm(`'${name}' 템플릿을 삭제할까요?`)) return setStatus('삭제를 취소했어요.');
-    if (!commit(templates.filter((_, i) => i !== selected))) return;
-    selected = -1;
+    refresh();
+    const target = findSelected();
+    if (!target) { renderList(); return setStatus(noTarget('삭제할')); }
+    if (!window.confirm(`'${target.name}' 템플릿을 삭제할까요?`)) return setStatus('삭제를 취소했어요.');
+    refresh();                                                          // 확인창이 떠 있는 동안 바뀌었을 수 있으니 한 번 더 읽는다
+    if (!templates.some(t => t.id === target.id)) { renderList(); return setStatus(GONE); }
+    if (!commit(templates.filter(t => t.id !== target.id))) return;
+    selectedId = null;
+    selectionLost = false;
+    $('tname').value = '';
     renderList();
     setStatus('템플릿을 삭제했습니다.');
   };
+
+  // 다른 창에서 템플릿이 바뀌면 이 창의 목록도 저장된 데이터로 다시 그린다
+  window.addEventListener('storage', e => {
+    if (e.key !== STORAGE_KEY && e.key !== null) return;
+    refresh();
+    renderList();
+    setStatus('다른 창에서 템플릿이 바뀌어 목록을 새로 불러왔어요.');
+  });
 
   // ---------- JSON 내보내기 / 가져오기 ----------
   function downloadBlob(blob, filename) {
@@ -479,6 +562,7 @@
   }
 
   $('exportJson').onclick = () => {
+    refresh();
     if (templates.length === 0) return setStatus('내보낼 템플릿이 없어요. 먼저 템플릿을 저장하세요.');
     downloadBlob(new Blob([JSON.stringify({ version: 1, templates }, null, 2)], { type: 'application/json' }), 'templates.json');
     setStatus(`템플릿 ${templates.length}개를 templates.json으로 내보냈습니다.`);
@@ -495,11 +579,13 @@
     catch (err) { return setStatus('JSON 가져오기 거부: 올바른 JSON 형식이 아닙니다(괄호·따옴표가 닫혔는지 확인하세요).' + keep); }
     const problem = validateBackup(data);
     if (problem) return setStatus('JSON 가져오기 거부: ' + problem + keep);
+    refresh();
     if (templates.length > 0 && !window.confirm(`기존 템플릿 ${templates.length}개를 가져온 ${data.templates.length}개로 바꿀까요?`)) {
       return setStatus('가져오기를 취소했어요.' + keep);
     }
     if (!commit(data.templates.map(clean))) return;
-    selected = -1;
+    selectedId = null;
+    selectionLost = false;
     renderList();
     setStatus(`JSON을 검증하고 템플릿 ${templates.length}개를 복원했습니다.`);
   });
