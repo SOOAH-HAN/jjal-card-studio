@@ -48,6 +48,9 @@
   input, select, textarea, button { font: inherit; width: 100%; border: 1.5px solid var(--edge); border-radius: 8px; background: #fff; color: var(--ink); padding: 9px 11px; }
   input[type=range] { padding: 0; border: 0; accent-color: var(--deep); }
   input[type=color] { height: 42px; padding: 3px; cursor: pointer; }
+  .style-options { align-items: end; }
+  .check-option { display: flex; align-items: center; gap: 7px; margin: 12px 0 5px; font-weight: 500; }
+  .check-option input { width: auto; margin: 0; accent-color: var(--deep); }
   input[type=file] { font-size: 14px; padding: 8px; }
   textarea { resize: vertical; line-height: 1.5; }
   .row { display: flex; gap: 12px; }
@@ -126,6 +129,19 @@
         <div><label for="size">글자 크기 (8~240)</label><input id="size" type="number" min="8" max="240" value="52"></div>
         <div><label for="color">글자 색</label><input id="color" type="color" value="#ffffff"></div>
       </div>
+      <div>
+        <label for="fontFamily">글꼴</label>
+        <select id="fontFamily">
+          <option value="default">기본 글꼴</option>
+          <option value="malgun">맑은 고딕</option>
+          <option value="batang">바탕</option>
+          <option value="gungseo">궁서</option>
+        </select>
+      </div>
+      <div class="row style-options">
+        <label class="check-option" for="bold"><input id="bold" type="checkbox" checked> 굵게</label>
+        <label class="check-option" for="italic"><input id="italic" type="checkbox"> 기울임</label>
+      </div>
       <div class="note">미리보기에서 글자를 직접 끌어서도 옮길 수 있어요. 슬라이더는 미세 조정에 쓰세요.</div>
       <div class="note" id="fitNote" aria-live="polite"></div>
     </div>
@@ -199,6 +215,9 @@
     if (!Number.isFinite(t.x) || t.x < 0 || t.x > 100) return `${where}의 x 값이 올바르지 않습니다(0~100).`;
     if (!Number.isFinite(t.y) || t.y < 0 || t.y > 100) return `${where}의 y 값이 올바르지 않습니다(0~100).`;
     if (typeof t.color !== 'string' || !/^#[0-9a-fA-F]{6}$/.test(t.color)) return `${where}의 color 값이 올바르지 않습니다(#rrggbb 형식).`;
+    if (t.fontFamily !== undefined && !['default', 'malgun', 'batang', 'gungseo'].includes(t.fontFamily)) return `${where}의 fontFamily 값이 올바르지 않습니다.`;
+    if (t.bold !== undefined && typeof t.bold !== 'boolean') return `${where}의 bold 값이 올바르지 않습니다.`;
+    if (t.italic !== undefined && typeof t.italic !== 'boolean') return `${where}의 italic 값이 올바르지 않습니다.`;
     return null;
   }
 
@@ -222,7 +241,12 @@
     return null;
   }
 
-  const clean = t => ({ id: t.id, name: t.name.trim(), text: t.text, ratio: t.ratio, size: t.size, x: t.x, y: t.y, color: t.color.toLowerCase() });
+  // 새 서식 필드가 없는 기존 템플릿은 기본값으로 보정한다.
+  const clean = t => ({
+    id: t.id, name: t.name.trim(), text: t.text, ratio: t.ratio,
+    size: t.size, x: t.x, y: t.y, color: t.color.toLowerCase(),
+    fontFamily: t.fontFamily ?? 'default', bold: t.bold ?? true, italic: t.italic ?? false,
+  });
 
   // ---------- 저장소 ----------
   let loadNotice = '';
@@ -268,10 +292,20 @@
       x: clamp(Number($('x').value), 0, 100),
       y: clamp(Number($('y').value), 0, 100),
       color: /^#[0-9a-fA-F]{6}$/.test($('color').value) ? $('color').value : '#ffffff',
+      fontFamily: $('fontFamily').value,
+      bold: $('bold').checked,
+      italic: $('italic').checked,
     };
   }
 
-  const fontFor = px => `700 ${px}px "Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Nanum Gothic",sans-serif`;
+  const FONT_FAMILIES = {
+    default: '"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo","Nanum Gothic",sans-serif',
+    malgun: '"Malgun Gothic",sans-serif',
+    batang: '"Batang",serif',
+    gungseo: '"Gungsuh",serif',
+  };
+  const fontFor = (px, s) =>
+    `${s.italic ? 'italic ' : ''}${s.bold ? '700' : '400'} ${px}px ${FONT_FAMILIES[s.fontFamily] || FONT_FAMILIES.default}`;
 
   // 한 문단을 maxW 안에 들어가도록 줄바꿈한다(띄어쓰기 우선, 긴 단어는 글자 단위).
   function wrapParagraph(paragraph, maxW) {
@@ -332,7 +366,7 @@
     let px = s.size, lines, lineH;
     // 글자가 화면보다 크면 맞을 때까지 줄여서 그린다(잘림 방지)
     for (;;) {
-      ctx.font = fontFor(px);
+      ctx.font = fontFor(px, s);
       lines = wrapText(s.text, maxW);
       lineH = Math.round(px * 1.3);
       if (lines.length * lineH <= maxH || px <= SIZE_MIN) break;
@@ -394,7 +428,7 @@
     im.src = url;
   });
 
-  ['ratio', 'copy', 'x', 'y', 'size', 'color'].forEach(id => $(id).addEventListener('input', draw));
+  ['ratio', 'copy', 'x', 'y', 'size', 'color', 'fontFamily', 'bold', 'italic'].forEach(id => $(id).addEventListener('input', draw));
   $('size').addEventListener('change', () => {          // 칸을 벗어날 때 범위 밖 값을 바로잡는다
     const raw = Number($('size').value), fixed = settings().size;
     if (!Number.isFinite(raw) || $('size').value === '' || raw !== fixed) {
@@ -487,11 +521,18 @@
     $('x').value = t.x;
     $('y').value = t.y;
     $('color').value = t.color;
+    $('fontFamily').value = t.fontFamily ?? 'default';
+    $('bold').checked = t.bold ?? true;
+    $('italic').checked = t.italic ?? false;
     draw();
   }
 
   const nameTaken = (name, exceptId) => templates.some(t => t.id !== exceptId && t.name === name);
-  const fromControls = (id, name, s) => ({ id, name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value, size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase() });
+  const fromControls = (id, name, s) => ({
+    id, name, text: s.text.slice(0, MAX_TEXT), ratio: s.ratio.value,
+    size: s.size, x: s.x, y: s.y, color: s.color.toLowerCase(),
+    fontFamily: s.fontFamily, bold: s.bold, italic: s.italic,
+  });
 
   $('save').onclick = () => {
     refresh();
